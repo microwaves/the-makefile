@@ -11,6 +11,12 @@ release:
 	GOOS=darwin GOARCH=$(ARCH) go build -o releases/$(BIN_NAME)-$(CURRENT_TAG)-darwin-$(ARCH) main.go
 	GOOS=windows GOARCH=$(ARCH) go build -o releases/$(BIN_NAME)-$(CURRENT_TAG)-windows-$(ARCH).exe main.go
 
+static:
+	CGO_ENABLED=0 GOOS=linux GOARCH=$(ARCH) go build -o releases/$(BIN_NAME)-$(CURRENT_TAG)-static-linux-$(ARCH) -a -tags netgo -ldflags '-w' main.go
+	CGO_ENABLED=0 GOOS=freebsd GOARCH=$(ARCH) go build -o releases/$(BIN_NAME)-$(CURRENT_TAG)-static-freebsd-$(ARCH) -a -tags netgo -ldflags '-w' main.go
+	CGO_ENABLED=0 GOOS=darwin GOARCH=$(ARCH) go build -o releases/$(BIN_NAME)-$(CURRENT_TAG)-static-darwin-$(ARCH) -a -tags netgo -ldflags '-w' main.go
+	CGO_ENABLED=0 GOOS=windows GOARCH=$(ARCH) go build -o releases/$(BIN_NAME)-$(CURRENT_TAG)-static-windows-$(ARCH).exe -a -tags netgo -ldflags '-w' main.go
+
 image:
 	docker build . -f $(DOCKER_FILE) -t $(DOCKER_REPO):$(CURRENT_TAG)
 	docker build . -f $(DOCKER_FILE) -t $(DOCKER_REPO):latest
