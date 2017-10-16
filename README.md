@@ -1,6 +1,6 @@
 # the-makefile
 
-Very simple and generic `Makefile` for Go projects. It builds binaries for multiple platforms, static binaries for *nix and creates Docker images.
+Very simple and generic `Makefile` for Go projects. It builds binaries for multiple platforms, static binaries and creates Docker images.
 
 ## Install
 
