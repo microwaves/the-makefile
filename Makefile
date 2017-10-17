@@ -19,7 +19,7 @@ static:
 
 image:
 	docker build . -f $(DOCKER_FILE) -t $(DOCKER_REPO):$(CURRENT_TAG)
-	docker build . -f $(DOCKER_FILE) -t $(DOCKER_REPO):latest
+	docker tag $(DOCKER_REPO):$(CURRENT_TAG) $(DOCKER_REPO):latest
 
 version:
 	@echo $(CURRENT_TAG)
